@@ -1,11 +1,11 @@
 {
   "expo": {
-    "name": "expo-mvvm-app",
-    "slug": "expo-mvvm-app",
+    "name": "coffego",
+    "slug": "coffego",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
-    "scheme": "expomvvmapp",
+    "scheme": "coffego",
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
     "ios": {
