@@ -2,6 +2,11 @@ import { useState, useEffect } from 'react';
 import { Platform, PermissionsAndroid } from 'react-native';
 import Geolocation, { GeolocationResponse } from '@react-native-community/geolocation';
 
+Geolocation.setRNConfiguration({
+  skipPermissionRequests: false,
+  authorizationLevel: 'whenInUse',
+});
+
 export const useLocationPermission = () => {
   const [location, setLocation] = useState<GeolocationResponse | null>(null);
   const [errorMsg, setErrorMsg] = useState<string | null>(null);
