@@ -1,6 +1,7 @@
-import { Text, ActivityIndicator, TouchableOpacity } from "react-native"
-import { SafeAreaView } from "react-native-safe-area-context"
-import { useHomeViewModel } from "./home.view-model"
+import { ActivityIndicator, Text, TouchableOpacity } from "react-native";
+import MapView from "react-native-maps";
+import { SafeAreaView } from "react-native-safe-area-context";
+import { useHomeViewModel } from "./home.view-model";
 
 export default function HomeView() {
     const { location, errorMsg, isLoading, requestPermissionAndFetchLocation } = useHomeViewModel();
@@ -23,12 +24,19 @@ export default function HomeView() {
                     </TouchableOpacity>
                 </>
             ) : location ? (
-                <>
-                    <Text className="text-primary text-headline-md font-serif text-center mb-6">Mapa Liberado</Text>
-                    <Text className="text-on-surface text-label-md uppercase tracking-widest mt-2 mb-1">Coordenadas Atuais:</Text>
-                    <Text className="text-on-surface text-label-md">Lat: {location.coords.latitude.toFixed(4)}</Text>
-                    <Text className="text-on-surface text-label-md">Lng: {location.coords.longitude.toFixed(4)}</Text>
-                </>
+                
+                    <MapView
+                        style={{ flex: 1, width: '100%', height: '100%', position: 'absolute', top: 0, left: 0, right: 0 }}
+                        initialRegion={{
+                            latitude: location.coords.latitude,
+                            longitude: location.coords.longitude,
+                            latitudeDelta: 0.0922,
+                            longitudeDelta: 0.0421,
+                        }}
+                        showsUserLocation={true}
+                    />
+                    
+           
             ) : (
                 <Text className="text-primary text-headline-sm font-serif">Bem-vindo(a)</Text>
             )}
