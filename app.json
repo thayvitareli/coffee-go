@@ -10,7 +10,12 @@
     "newArchEnabled": true,
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.vitareli.apps.coffeego"
+      "bundleIdentifier": "com.vitareli.apps.coffeego",
+      "infoPlist": {
+        "NSLocationWhenInUseUsageDescription": "O aplicativo precisa de acesso à localização para mostrar as cafeterias próximas.",
+        "NSLocationAlwaysUsageDescription": "O aplicativo precisa de acesso à localização para mostrar as cafeterias próximas.",
+        "NSLocationAlwaysAndWhenInUseUsageDescription": "O aplicativo precisa de acesso à localização para mostrar as cafeterias próximas."
+      }
     },
     "android": {
       "adaptiveIcon": {
