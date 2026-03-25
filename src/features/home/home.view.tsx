@@ -1,6 +1,7 @@
 import SimpleLineIcons from '@expo/vector-icons/SimpleLineIcons';
 import { ActivityIndicator, Text, TouchableOpacity, View } from "react-native";
-import MapView, { Marker } from "react-native-maps";
+import MapView, { Marker, Callout } from "react-native-maps";
+import { Image } from "expo-image";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useHomeViewModel } from "./home.view-model";
 
@@ -40,15 +41,35 @@ export default function HomeView() {
                     >
                         {coffeeShops.map((shop) => (
                             <Marker
-                                
                                 key={shop.id}
                                 coordinate={{ latitude: shop.latitude, longitude: shop.longitude }}
-                                title={shop.displayName}
-                                description={shop.address}
                             >
                                 <View className="w-7 h-7 rounded-full bg-primary/80 justify-center items-center border-white border-2" >
-<SimpleLineIcons name="cup" size={12} color="white"  />
+                                    <SimpleLineIcons name="cup" size={12} color="white"  />
                                 </View>
+                                <Callout tooltip>
+                                    <View className="bg-white rounded-xl p-3 w-60 shadow-lg items-center">
+                                        {shop.photoUrl && (
+                                            <Image 
+                                                source={{ uri: shop.photoUrl }} 
+                                                style={{ width: '100%', height: 120, borderRadius: 8, marginBottom: 8 }} 
+                                                contentFit="cover"
+                                            />
+                                        )}
+                                        <Text className="font-serif text-lg text-primary text-center font-bold mb-1">{shop.displayName}</Text>
+                                        
+                                        <View className="flex-row items-center justify-between w-full">
+                                            {shop.isOpenNow !== undefined && (
+                                                <Text className={`text-xs font-bold ${shop.isOpenNow ? 'text-green-600' : 'text-red-500'}`}>
+                                                    {shop.isOpenNow ? 'Aberto' : 'Fechado'}
+                                                </Text>
+                                            )}
+                                            {shop.rating && (
+                                                <Text className="text-xs text-yellow-600 font-bold">★ {shop.rating} ({shop.userRatingCount})</Text>
+                                            )}
+                                        </View>
+                                    </View>
+                                </Callout>
                             </Marker>
                         ))}
                     </MapView>

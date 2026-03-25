@@ -6,6 +6,15 @@ export interface CoffeeShop {
     address: string;
     rating?: number;
     userRatingCount?: number;
+    photoUrl?: string;
+    isOpenNow?: boolean;
+    weekdayDescriptions?: string[];
+    reviews?: {
+        author: string;
+        text: string;
+        rating: number;
+        relativeTime: string;
+    }[];
 }
 
 export interface HomeModel {
