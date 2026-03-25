@@ -1,11 +1,13 @@
-import { ActivityIndicator, Text, TouchableOpacity } from "react-native";
-import MapView from "react-native-maps";
+import SimpleLineIcons from '@expo/vector-icons/SimpleLineIcons';
+import { ActivityIndicator, Text, TouchableOpacity, View } from "react-native";
+import MapView, { Marker } from "react-native-maps";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useHomeViewModel } from "./home.view-model";
 
 export default function HomeView() {
-    const { location, errorMsg, isLoading, requestPermissionAndFetchLocation } = useHomeViewModel();
+    const { location, errorMsg, isLoading, requestPermissionAndFetchLocation, coffeeShops } = useHomeViewModel();
 
+    console.log(coffeeShops);
     return (
         <SafeAreaView className="flex-1 items-center justify-center bg-surface">
             {isLoading ? (
@@ -30,11 +32,26 @@ export default function HomeView() {
                         initialRegion={{
                             latitude: location.coords.latitude,
                             longitude: location.coords.longitude,
-                            latitudeDelta: 0.0922,
-                            longitudeDelta: 0.0421,
+                            latitudeDelta: 0.01,
+                            longitudeDelta: 0.01,
                         }}
                         showsUserLocation={true}
-                    />
+                        // provider={PROVIDER_GOOGLE}
+                    >
+                        {coffeeShops.map((shop) => (
+                            <Marker
+                                
+                                key={shop.id}
+                                coordinate={{ latitude: shop.latitude, longitude: shop.longitude }}
+                                title={shop.displayName}
+                                description={shop.address}
+                            >
+                                <View className="w-7 h-7 rounded-full bg-primary/80 justify-center items-center border-white border-2" >
+<SimpleLineIcons name="cup" size={12} color="white"  />
+                                </View>
+                            </Marker>
+                        ))}
+                    </MapView>
                     
            
             ) : (
