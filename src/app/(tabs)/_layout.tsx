@@ -43,22 +43,11 @@ export default function TabLayout() {
         name="index"
         options={{
           headerShown: true,
-          headerLeft: () => (
-            <View className='pl-4'>
-              <Ionicons size={28} name="menu"  />
-            </View>
-          ),
-          title: 'Mapa',
+          title: 'Map',
           tabBarIcon: ({ color }) => <Ionicons size={28} name="map-sharp" color={color} />,
         }}
       />
-      <Tabs.Screen
-        name="search"
-        options={{
-          title: 'Search',
-          tabBarIcon: ({ color }) => <Ionicons size={28} name="search" color={color} />,
-        }}
-      />
+     
       <Tabs.Screen
         name="favorites"
         options={{
