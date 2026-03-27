@@ -6,9 +6,21 @@ import { Colors } from '@/constants/theme';
 import { useColorScheme } from '@/hooks/use-color-scheme';
 import { Ionicons } from '@expo/vector-icons';
 import { View } from 'react-native';
+import { useAuthStore } from '@/store/use-auth-store';
+import { useRouter } from 'expo-router';
 
 export default function TabLayout() {
   const colorScheme = useColorScheme();
+  const router = useRouter();
+  const { isAuthenticated, isGuest } = useAuthStore();
+
+  const requireAuth = (e: any) => {
+    // If user is not authenticated or is browsing as a guest, require explicit login
+    if (!isAuthenticated || isGuest) {
+      e.preventDefault();
+      router.push('/sign-in');
+    }
+  };
 
   return (
     <Tabs
@@ -53,6 +65,7 @@ export default function TabLayout() {
           title: 'Favorites',
           tabBarIcon: ({ color }) => <Ionicons size={28} name="heart" color={color} />,
         }}
+        listeners={{ tabPress: requireAuth }}
       />
       <Tabs.Screen
         name="profile"
@@ -60,6 +73,7 @@ export default function TabLayout() {
           title: 'Profile',
           tabBarIcon: ({ color }) => <Ionicons size={28} name="person" color={color} />,
         }}
+        listeners={{ tabPress: requireAuth }}
       />
     </Tabs>
   );
