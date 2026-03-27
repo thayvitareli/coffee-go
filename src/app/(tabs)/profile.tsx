@@ -1,10 +1,8 @@
-import { Text, View } from "react-native";
+import ProfileView from "@/features/profile/profile.view";
+import { useProfileViewModel } from "@/features/profile/profile.view-model";
 
 export default function ProfileScreen() {
+  const { user, signOut } = useProfileViewModel();
 
-  return (
-    <View>
-      <Text>Profile</Text>
-    </View>
-  );
+  return <ProfileView user={user} signOut={signOut} />;
 }

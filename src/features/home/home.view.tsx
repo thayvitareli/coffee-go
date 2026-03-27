@@ -8,7 +8,6 @@ import { useHomeViewModel } from "./home.view-model";
 export default function HomeView() {
     const { location, errorMsg, isLoading, requestPermissionAndFetchLocation, coffeeShops } = useHomeViewModel();
 
-    console.log(coffeeShops);
     return (
         <SafeAreaView className="flex-1 items-center justify-center bg-surface">
             {isLoading ? (
