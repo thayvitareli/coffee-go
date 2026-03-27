@@ -1,50 +1,65 @@
-# Welcome to your Expo app 👋
+# CoffeGo ☕️
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+O CoffeGo é um aplicativo desenvolvido em **React Native** com **Expo**. Este projeto foi criado com o objetivo principal de servir como uma **ferramenta de estudo** para explorar e aprender sobre o desenvolvimento mobile moderno, padrões de arquitetura e design no ecossistema React.
 
-## Get started
+---
 
-1. Install dependencies
+## 🏗 Arquitetura
 
+O projeto adota a arquitetura **MVVM (Model-View-ViewModel)**. O código principal está organizado dentro do diretório `/src`, promovendo uma separação clara das responsabilidades:
+
+- **Model:** Gerencia os dados da aplicação, tipos e as regras fundamentais.
+- **View (`.view.tsx`):** Componentes puramente visuais (UI).
+- **ViewModel (`.viewmodel.ts`):** Camada do meio que conecta a View aos Models/Serviços. Contém a lógica de apresentação e interações antes de atualizar o estado visual.
+
+A navegação baseia-se no **Expo Router**, possuindo roteamento em formato de arquivos no diretório `app`.
+
+Estrutura de pastas da arquitetura (`/src`):
+- `/components`: Componentes visuais genéricos e reutilizáveis.
+- `/features`: Agrupa as telas da aplicação, onde cada funcionalidade contém seus arquivos *View* e *ViewModel*.
+- `/hooks`: Hooks React customizados do projeto.
+- `/services`: Abstração de consumo de APIs e módulos externos.
+- `/store`: Gerenciador de estado global da aplicação.
+
+---
+
+## 🔌 APIs Usadas
+
+Durante a construção do aplicativo, houve a integração com as seguintes APIs externas para estudo:
+
+- **Google Places API:** Utilizada para buscar cafeterias nas proximidades, exibindo informações e marcadores diretamente no mapa integrado à aplicação.
+- **Google Sign In API:** Implementada para integrar o fluxo de autenticação, permitindo logar seguro aos usuários via conta do Google.
+
+---
+
+## 🛠 Frameworks e Bibliotecas (Libs)
+
+Diversas bibliotecas robustas foram incluídas em prol do ecossistema front-end do React Native:
+
+- **[React Native](https://reactnative.dev/) & [Expo](https://expo.dev/):** SDK e framework central para desenvolvimento e build (iOS, Android, Web).
+- **[Expo Router](https://docs.expo.dev/router/introduction/):** Solução moderna de roteamento (file-based routing).
+- **[NativeWind](https://www.nativewind.dev/) (com [Tailwind CSS](https://tailwindcss.com/)):** Usado intensivamente para estilizar e configurar o Design System ("Sensory Editorial") por meio de utility classes.
+- **[Zustand](https://github.com/pmndrs/zustand):** Ferramenta fácil, concisa e altamente escalável para gerenciar o estado global do projeto.
+- **[@tanstack/react-query (React Query)](https://tanstack.com/query/latest):** Gerencia requisições assíncronas, estado remoto, sincronização e cache de fetchs de dados de maneira performática.
+- **[React Native Maps](https://github.com/react-native-maps/react-native-maps):** Exibição do componente geográfico de Mapas e manipulação de marcadores interativos com a API Places.
+- **[@react-native-google-signin/google-signin](https://github.com/react-native-google-signin/google-signin):** Serviço OAuth2 de validação e sign-in da plataforma Google.
+- **[@react-native-community/geolocation](https://github.com/react-native-geolocation/react-native-geolocation):** Acesso nativo rápido e preciso aos sensores de localização real do smartphone do usuário.
+
+---
+
+## 🚀 Como Executar Localmente
+
+Para testar ou debugar o projeto localmente:
+
+1. Faça o clone deste repositório.
+2. Acesse a pasta do projeto (root) e instale as dependências:
    ```bash
    npm install
    ```
-
-2. Start the app
-
+3. Crie seu arquivo de ambiente (`.env.local` na raiz) e preencha as chaves públicas necessárias:
+   - `EXPO_PUBLIC_GOOGLE_PLACES_API_KEY=SUA_CHAVE_AQUI`
+   - _Entre outras que estão configuradas localmente para Google Cloud Platform e Firebase/Web Client._
+4. Inicie o Metro Bundler do Expo:
    ```bash
    npx expo start
    ```
-
-In the output, you'll find options to open the app in a
-
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
-
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
-
-## Get a fresh project
-
-When you're ready, run:
-
-```bash
-npm run reset-project
-```
-
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
-
-## Learn more
-
-To learn more about developing your project with Expo, look at the following resources:
-
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
-
-## Join the community
-
-Join our community of developers creating universal apps.
-
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
