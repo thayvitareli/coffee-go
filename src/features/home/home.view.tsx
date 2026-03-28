@@ -4,9 +4,11 @@ import MapView, { Marker, Callout } from "react-native-maps";
 import { Image } from "expo-image";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useHomeViewModel } from "./home.view-model";
+import { useRouter } from "expo-router";
+import { CoffeeShop } from './home.model';
+import { GeolocationResponse } from '@react-native-community/geolocation';
 
-export default function HomeView() {
-    const { location, errorMsg, isLoading, requestPermissionAndFetchLocation, coffeeShops } = useHomeViewModel();
+export default function HomeView({handleNavigateToDetails, coffeeShops, location, errorMsg, isLoading, requestPermissionAndFetchLocation}: {handleNavigateToDetails: (coffeeShop: CoffeeShop) => void, coffeeShops: CoffeeShop[], location: GeolocationResponse | null, errorMsg: string | null, isLoading: boolean, requestPermissionAndFetchLocation: () => void}) {
 
     return (
         <SafeAreaView className="flex-1 items-center justify-center bg-surface">
@@ -46,7 +48,10 @@ export default function HomeView() {
                                 <View className="w-7 h-7 rounded-full bg-primary/80 justify-center items-center border-white border-2" >
                                     <SimpleLineIcons name="cup" size={12} color="white"  />
                                 </View>
-                                <Callout tooltip>
+                                <Callout 
+                                    tooltip
+                                    onPress={() => handleNavigateToDetails(shop)}
+                                >
                                     <View className="bg-white rounded-xl p-3 w-60 shadow-lg items-center">
                                         {shop.photoUrl && (
                                             <Image 
