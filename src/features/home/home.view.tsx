@@ -3,8 +3,6 @@ import { ActivityIndicator, Text, TouchableOpacity, View } from "react-native";
 import MapView, { Marker, Callout } from "react-native-maps";
 import { Image } from "expo-image";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { useHomeViewModel } from "./home.view-model";
-import { useRouter } from "expo-router";
 import { CoffeeShop } from './home.model';
 import { GeolocationResponse } from '@react-native-community/geolocation';
 
@@ -62,7 +60,7 @@ export default function HomeView({handleNavigateToDetails, coffeeShops, location
                                         )}
                                         <Text className="font-serif text-lg text-primary text-center font-bold mb-1">{shop.displayName}</Text>
                                         
-                                        <View className="flex-row items-center justify-between w-full">
+                                        <View className="flex-row items-center px-2 justify-between w-full">
                                             {shop.isOpenNow !== undefined && (
                                                 <Text className={`text-xs font-bold ${shop.isOpenNow ? 'text-green-600' : 'text-red-500'}`}>
                                                     {shop.isOpenNow ? 'Aberto' : 'Fechado'}
