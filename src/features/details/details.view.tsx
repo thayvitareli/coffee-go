@@ -6,6 +6,7 @@ import { useRouter } from 'expo-router';
 import { Ionicons, MaterialCommunityIcons, Feather } from '@expo/vector-icons';
 import { useDetailsViewModel } from './details.view-model';
 import { useFavoritesStore } from '@/store/use-favorites-store';
+import { useVisitedStore } from '@/store/use-visited-store';
 
 export default function DetailsView() {
     const router = useRouter();
@@ -13,8 +14,10 @@ export default function DetailsView() {
     const { favorites, addFavorite, removeFavorite } = useFavoritesStore();
     const scrollViewRef = useRef<ScrollView>(null);
     const [showReviews, setShowReviews] = useState(false);
+    const { visitedShops, addVisited, removeVisited } = useVisitedStore();
 
     const isFav = coffeeShop ? favorites.some(s => s.id === coffeeShop.id) : false;
+    const isVis = coffeeShop ? visitedShops.some(s => s.id === coffeeShop.id) : false;
 
     const toggleFavorite = () => {
         if (!coffeeShop) return;
@@ -22,6 +25,15 @@ export default function DetailsView() {
             removeFavorite(coffeeShop.id);
         } else {
             addFavorite(coffeeShop);
+        }
+    };
+
+    const toggleVisited = () => {
+        if (!coffeeShop) return;
+        if (isVis) {
+            removeVisited(coffeeShop.id);
+        } else {
+            addVisited(coffeeShop);
         }
     };
 
@@ -153,6 +165,21 @@ export default function DetailsView() {
                     >
                         <MaterialCommunityIcons name="directions" size={20} color="white" style={{ marginRight: 8 }} />
                         <Text className="text-white font-sans font-bold text-base">How to arrive</Text>
+                    </TouchableOpacity>
+
+                    <TouchableOpacity 
+                        onPress={toggleVisited}
+                        className={`w-full rounded-xl py-4 flex-row justify-center items-center mb-3 shadow-sm ${isVis ? 'bg-[#94f990]' : 'bg-surface-container'}`}
+                    >
+                        <MaterialCommunityIcons 
+                            name={isVis ? "check-circle" : "check-circle-outline"} 
+                            size={20} 
+                            color={isVis ? "#005313" : "gray"} 
+                            style={{ marginRight: 8 }} 
+                        />
+                        <Text className={`font-sans font-bold text-base ${isVis ? 'text-[#005313]' : 'text-gray-600'}`}>
+                            {isVis ? 'Visited' : 'Mark as visited'}
+                        </Text>
                     </TouchableOpacity>
 
                     <View className="flex-row w-full gap-3">
