@@ -2,10 +2,12 @@ import SimpleLineIcons from '@expo/vector-icons/SimpleLineIcons';
 import { ActivityIndicator, Text, TouchableOpacity, View } from "react-native";
 import MapView, { Marker, Callout } from "react-native-maps";
 import { Image } from "expo-image";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { CoffeeShop } from './home.model';
 import { GeolocationResponse } from '@react-native-community/geolocation';
 
 export default function HomeView({handleNavigateToDetails, coffeeShops, location, errorMsg, isLoading, requestPermissionAndFetchLocation}: {handleNavigateToDetails: (coffeeShop: CoffeeShop) => void, coffeeShops: CoffeeShop[], location: GeolocationResponse | null, errorMsg: string | null, isLoading: boolean, requestPermissionAndFetchLocation: () => void}) {
+    const insets = useSafeAreaInsets();
 
     return (
         <View className="flex-1 items-center justify-center bg-surface">
@@ -25,7 +27,7 @@ export default function HomeView({handleNavigateToDetails, coffeeShops, location
                     </TouchableOpacity>
                 </>
             ) : location ? (
-                
+                <>
                     <MapView
                         style={{ flex: 1, width: '100%', height: '100%', position: 'absolute', top: 0, left: 0, right: 0 }}
                         initialRegion={{
@@ -75,6 +77,18 @@ export default function HomeView({handleNavigateToDetails, coffeeShops, location
                         ))}
                     </MapView>
                     
+                    <View 
+                        className="absolute w-full items-center pointer-events-none" 
+                        style={{ top: Math.max(insets.top, 20) }}
+                        pointerEvents="none"
+                    >
+                        <View className="bg-white/80 px-6 py-2 rounded-full shadow-ambient backdrop-blur-lg">
+                            <Text className="font-serif text-xl font-bold text-primary tracking-widest uppercase">
+                                Coffee Go
+                            </Text>
+                        </View>
+                    </View>
+                </>
            
             ) : (
                 <Text className="text-primary text-headline-sm font-serif">Bem-vindo(a)</Text>
