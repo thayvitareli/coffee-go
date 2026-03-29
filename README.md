@@ -1,5 +1,93 @@
 # Coffee-Go ☕️
 
+*(🇺🇸 English version below | 🇧🇷 [Versão em Português abaixo](#-versão-em-português))*
+
+---
+
+**Coffee-Go** is a mobile application developed in **React Native** with **Expo**.
+
+> **Note:** This project was created primarily as a **study tool** to explore modern mobile development, architectural patterns, and design within the React ecosystem.
+
+---
+
+## 🎨 Design System: "Sensory Editorial"
+
+The app steps away from traditional UI patterns to implement an original Design System called **Sensory Editorial**, focused on conveying a premium "boutique cafe" aesthetic.
+- **Colors:** Sophisticated palettes such as `primary` (intense espresso), `surface` (creamy foam), and `tertiary` (leaf green/coffee cherry).
+- **Typography:** Striking use of elegant serif fonts (**Noto Serif**) paired with clean, modern sans-serif fonts (**Plus Jakarta Sans**).
+- **Visual Style:** Translucent elements (glassmorphism/blur), soft shadows (*ambient shadows*), and rounded borders.
+
+---
+
+## ✨ Features
+
+The application offers a complete user flow focused on exploring coffee shops:
+
+- **Authentication:** Secure and practical social login using the **Google Sign-In API**.
+- **Map Exploration (Home):** The main map tracks the user's location and uses the **Google Places API** to plot interactive markers for nearby coffee shops. Native rendering of the Google Maps SDK.
+- **Coffee Shop Details:** A rich screen built with a translucent header, detailing: location photo, "Open/Closed" status, rating, amenities (Pet Friendly, Outdoor, WiFi), a direct *"How to arrive"* shortcut (opens native routes like Google Maps, Apple Maps), and a Reviews modal.
+- **Favorites:** Users can like coffee shops and easily find them in the favorites tab, managed in memory.
+- **Profile and History (Visited):** On the profile screen, users can view their Google account details and a visual history of locations actively marked as **"Visited"**.
+
+---
+
+## 🏗 Architecture
+
+The project adopts the **MVVM (Model-View-ViewModel)** architecture. The code is organized in a strictly modular and decoupled way within the `/src` directory:
+
+- **Model (`.model.ts`):** Primitive entities, typings (types/interfaces), and domain management (e.g., `CoffeeShop`).
+- **ViewModel (`.view-model.ts`):** The "brain" of the screens. It uses custom hooks, integrates with Zustand (Stores), handles business rules, React Query, cache, navigation, and returns a pure object for the View to consume.
+- **View (`.view.tsx`):** 100% visual components (*dumb components*). They receive data passed by the ViewModel via _props_ and render them on the screen using NativeWind.
+
+This structure (`/src/features`) greatly simplifies maintenance, unit testing, and visual organization.
+
+---
+
+## 🛠 Frameworks and Libraries
+
+- **[React Native & Expo](https://expo.dev/):** Base SDK for the application.
+- **[Expo Router](https://docs.expo.dev/router/introduction/):** *File-based* navigation utilizing dynamic routes and tab layouts (`Tabs`).
+- **[NativeWind](https://www.nativewind.dev/) (Tailwind CSS):** Styling entirely based on *utility classes*.
+- **[Zustand](https://github.com/pmndrs/zustand):** Lightweight and scalable global state control. Split into different flows such as `use-auth-store`, `use-favorites-store`, and `use-visited-store`.
+- **[@tanstack/react-query](https://tanstack.com/query/latest):** Optimizes calls to the Google Places API through _cache_, validation, and auto-retry (remote state).
+- **[React Native Maps](https://github.com/react-native-maps/react-native-maps):** Maps engine natively configured with the `PROVIDER_GOOGLE` engine.
+- **[Google Sign-In](https://github.com/react-native-google-signin/google-signin):** Native authentication module.
+
+---
+
+## 🚀 How to Run Locally
+
+Because the project makes extensive use of Google Maps SDKs on iOS and Google Sign-In features, **it cannot be run in the standard Expo Go app**. You must run a *Custom Development Client* (with native build).
+
+1. Clone this repository and access the project folder.
+2. Install the dependencies:
+   ```bash
+   npm install
+   ```
+3. Create and configure your `.env.local` file at the root with the required keys:
+   ```env
+   EXPO_PUBLIC_GOOGLE_PLACES_API_KEY=your_places_key
+   EXPO_PUBLIC_GOOGLE_MAPS_API_KEY=your_ios_maps_key
+   EXPO_PUBLIC_IOS_URL_SCHEMA=your_ios_schema
+   ```
+4. Prebuild to regenerate the `/ios` and `/android` folders connected to your app.config.js:
+   ```bash
+   npx expo prebuild --clean
+   ```
+5. Run directly on the emulator/device generating the custom client:
+   ```bash
+   # For iOS
+   npx expo run:ios
+   
+   # For Android
+   npx expo run:android
+   ```
+
+---
+---
+
+# 🇧🇷 Versão em Português
+
 O **Coffee-Go** é um aplicativo mobile desenvolvido em **React Native** com **Expo**. 
 
 > **Aviso:** Este projeto foi criado com o objetivo principal de servir como uma **ferramenta de estudo** para explorar desenvolvimento mobile moderno, padrões de arquitetura e design no ecossistema React.
