@@ -6,6 +6,12 @@
 
 **Coffee-Go** is a mobile application developed in **React Native** with **Expo**.
 
+
+
+https://github.com/user-attachments/assets/d53679ee-1f20-411c-bbf9-368de315d7db
+
+
+
 > **Note:** This project was created primarily as a **study tool** to explore modern mobile development, architectural patterns, and design within the React ecosystem.
 
 ---
