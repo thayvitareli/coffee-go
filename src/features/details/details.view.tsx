@@ -1,41 +1,24 @@
-import React, { useRef, useState } from 'react';
-import { View, Text, ScrollView, TouchableOpacity, Linking, Share, Modal } from 'react-native';
+import React, { useRef } from 'react';
+import { View, Text, ScrollView, TouchableOpacity, Modal } from 'react-native';
 import { Image } from 'expo-image';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { useRouter } from 'expo-router';
-import { Ionicons, MaterialCommunityIcons, Feather } from '@expo/vector-icons';
+import { Ionicons, MaterialCommunityIcons } from '@expo/vector-icons';
 import { useDetailsViewModel } from './details.view-model';
-import { useFavoritesStore } from '@/store/use-favorites-store';
-import { useVisitedStore } from '@/store/use-visited-store';
 
-export default function DetailsView() {
-    const router = useRouter();
-    const { coffeeShop, isLoading } = useDetailsViewModel();
-    const { favorites, addFavorite, removeFavorite } = useFavoritesStore();
+export default function DetailsView({
+    coffeeShop,
+    isLoading,
+    isFav,
+    isVis,
+    showReviews,
+    setShowReviews,
+    toggleFavorite,
+    toggleVisited,
+    handleGoBack,
+    handleHowToArrive,
+    handleShare
+}: ReturnType<typeof useDetailsViewModel>) {
     const scrollViewRef = useRef<ScrollView>(null);
-    const [showReviews, setShowReviews] = useState(false);
-    const { visitedShops, addVisited, removeVisited } = useVisitedStore();
-
-    const isFav = coffeeShop ? favorites.some(s => s.id === coffeeShop.id) : false;
-    const isVis = coffeeShop ? visitedShops.some(s => s.id === coffeeShop.id) : false;
-
-    const toggleFavorite = () => {
-        if (!coffeeShop) return;
-        if (isFav) {
-            removeFavorite(coffeeShop.id);
-        } else {
-            addFavorite(coffeeShop);
-        }
-    };
-
-    const toggleVisited = () => {
-        if (!coffeeShop) return;
-        if (isVis) {
-            removeVisited(coffeeShop.id);
-        } else {
-            addVisited(coffeeShop);
-        }
-    };
 
     if (isLoading) {
         return (
@@ -49,28 +32,12 @@ export default function DetailsView() {
         return (
             <View className="flex-1 justify-center items-center bg-surface">
                 <Text className="text-primary font-sans">Cafeteria não encontrada.</Text>
-                <TouchableOpacity onPress={() => router.back()} className="mt-4">
+                <TouchableOpacity onPress={handleGoBack} className="mt-4">
                     <Text className="text-primary font-bold">Voltar</Text>
                 </TouchableOpacity>
             </View>
         );
     }
-
-    const handleHowToArrive = () => {
-        const url = `https://www.google.com/maps/dir/?api=1&destination=${coffeeShop.latitude},${coffeeShop.longitude}`;
-        Linking.openURL(url);
-    };
-
-    const handleShare = async () => {
-        try {
-            await Share.share({
-                message: `Confira a cafeteria ${coffeeShop.displayName} em ${coffeeShop.address}!`,
-                url: `https://www.google.com/maps/search/?api=1&query=${coffeeShop.latitude},${coffeeShop.longitude}`,
-            });
-        } catch (error) {
-            console.error(error);
-        }
-    };
 
     return (
         <View className="flex-1 bg-surface">
@@ -86,7 +53,7 @@ export default function DetailsView() {
                     {/* Header Overlay */}
                     <SafeAreaView className="absolute top-0 left-0 right-0 flex-row justify-between items-center px-6 pt-4">
                         <TouchableOpacity 
-                            onPress={() => router.back()}
+                            onPress={handleGoBack}
                             className="w-10 h-10 rounded-full bg-white/20 items-center justify-center backdrop-blur-md"
                         >
                             <Ionicons name="arrow-back" size={24} color="white" />
@@ -100,7 +67,6 @@ export default function DetailsView() {
                             >
                                 <Ionicons name={isFav ? "heart" : "heart-outline"} size={24} color={isFav ? "red" : "white"} />
                             </TouchableOpacity>
-                        
                         </View>
                     </SafeAreaView>
                 </View>
@@ -144,7 +110,7 @@ export default function DetailsView() {
                         <AmenityIcon 
                             icon="wifi" 
                             label="FAST WIFI" 
-                            available={true} // Google doesn't always provide this, but if we want to match prototype we can show it if we have any indication
+                            available={true}
                         />
                         <AmenityIcon 
                             icon="paw" 
