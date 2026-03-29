@@ -42,6 +42,8 @@ export default function TabLayout() {
       <Tabs.Screen
         name="index"
         options={{
+          headerShown: false,
+          title: 'Map',
           tabBarIcon: ({ color }) => <Ionicons size={28} name="map-sharp" color={color} />,
         }}
       />

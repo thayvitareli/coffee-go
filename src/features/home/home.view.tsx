@@ -2,14 +2,13 @@ import SimpleLineIcons from '@expo/vector-icons/SimpleLineIcons';
 import { ActivityIndicator, Text, TouchableOpacity, View } from "react-native";
 import MapView, { Marker, Callout } from "react-native-maps";
 import { Image } from "expo-image";
-import { SafeAreaView } from "react-native-safe-area-context";
 import { CoffeeShop } from './home.model';
 import { GeolocationResponse } from '@react-native-community/geolocation';
 
 export default function HomeView({handleNavigateToDetails, coffeeShops, location, errorMsg, isLoading, requestPermissionAndFetchLocation}: {handleNavigateToDetails: (coffeeShop: CoffeeShop) => void, coffeeShops: CoffeeShop[], location: GeolocationResponse | null, errorMsg: string | null, isLoading: boolean, requestPermissionAndFetchLocation: () => void}) {
 
     return (
-        <SafeAreaView className="flex-1 items-center justify-center bg-surface">
+        <View className="flex-1 items-center justify-center bg-surface">
             {isLoading ? (
                 <>
                     <ActivityIndicator size="large" color="#271310" />
@@ -80,6 +79,6 @@ export default function HomeView({handleNavigateToDetails, coffeeShops, location
             ) : (
                 <Text className="text-primary text-headline-sm font-serif">Bem-vindo(a)</Text>
             )}
-        </SafeAreaView>
+        </View>
     )
 }
