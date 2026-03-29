@@ -1,10 +1,14 @@
-import { Text, View } from "react-native";
+import FavoritesView from '@/features/favorites/favorites.view';
+import { useFavoritesViewModel } from '@/features/favorites/favorites.view-model';
 
 export default function FavoritesScreen() {
+  const { favorites, handleNavigateToDetails, handleRemoveFavorite } = useFavoritesViewModel();
 
   return (
-    <View>
-      <Text>favorites</Text>
-    </View>
+    <FavoritesView 
+      favorites={favorites} 
+      handleNavigateToDetails={handleNavigateToDetails} 
+      handleRemoveFavorite={handleRemoveFavorite} 
+    />
   );
 }
