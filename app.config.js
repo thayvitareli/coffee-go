@@ -15,6 +15,9 @@ module.exports = {
         NSLocationWhenInUseUsageDescription: "O aplicativo precisa de acesso à localização para mostrar as cafeterias próximas.",
         NSLocationAlwaysUsageDescription: "O aplicativo precisa de acesso à localização para mostrar as cafeterias próximas.",
         NSLocationAlwaysAndWhenInUseUsageDescription: "O aplicativo precisa de acesso à localização para mostrar as cafeterias próximas."
+      },
+      config: {
+        googleMapsApiKey: process.env.EXPO_PUBLIC_GOOGLE_MAPS_API_KEY
       }
     },
     android: {
