@@ -1,65 +1,80 @@
-# CoffeGo ☕️
+# Coffee-Go ☕️
 
-O CoffeGo é um aplicativo desenvolvido em **React Native** com **Expo**. Este projeto foi criado com o objetivo principal de servir como uma **ferramenta de estudo** para explorar e aprender sobre o desenvolvimento mobile moderno, padrões de arquitetura e design no ecossistema React.
+O **Coffee-Go** é um aplicativo mobile desenvolvido em **React Native** com **Expo**. 
+
+> **Aviso:** Este projeto foi criado com o objetivo principal de servir como uma **ferramenta de estudo** para explorar desenvolvimento mobile moderno, padrões de arquitetura e design no ecossistema React.
+
+---
+
+## 🎨 Design System: "Sensory Editorial"
+
+O aplicativo foge do padrão de UI tradicional e implementa um Design System autoral chamado **Sensory Editorial**, focado em transmitir uma estética premium de "cafeteria boutique". 
+- **Cores:** Paletas sofisticadas como `primary` (espresso intenso), `surface` (creamy foam) e `tertiary` (verde folha/cereja do café).
+- **Tipografia:** Uso marcante de fontes serifadas elegantes (**Noto Serif**) combinadas com fontes sem serifa limpas e modernas (**Plus Jakarta Sans**).
+- **Estilo Visual:** Elementos translúcidos (glassmorphism/blur), sombras suaves (*ambient shadows*) e bordas arredondadas.
+
+---
+
+## ✨ Funcionalidades
+
+O aplicativo possui um fluxo de usuário completo focado na exploração de cafeterias:
+
+- **Autenticação:** Login social seguro e prático usando a API do **Google Sign-In**.
+- **Exploração por Mapa (Home):** O mapa principal rastreia a localização do usuário e utiliza a **Google Places API** para plotar *markers* interativos de cafeterias próximas. Renderização nativa do SDK do Google Maps.
+- **Detalhes da Cafeteria (Details):** Uma tela rica construída sobre um cabeçalho translúcido, detalhando: foto do local, status "Aberto/Fechado", rating, comodidades (Pet Friendly, Outdoor, WiFi), atalho direto *"Como Chegar"* (abre rotas nativas como Google Maps, Apple Maps) e modal de Avaliações/Reviews.
+- **Favoritos:** Os usuários podem curtir cafeterias e encontrá-las facilmente na aba de favoritos, gerenciados em memória.
+- **Perfil e Histórico (Visited):** Na tela de perfil, o usuário consegue ver seus dados da conta Google e um histórico visual dos locais marcados ativamente como **"Visitados"**.
 
 ---
 
 ## 🏗 Arquitetura
 
-O projeto adota a arquitetura **MVVM (Model-View-ViewModel)**. O código principal está organizado dentro do diretório `/src`, promovendo uma separação clara das responsabilidades:
+O projeto adota a arquitetura **MVVM (Model-View-ViewModel)**. O código está organizado de forma estritamente modular e desacoplada dentro do diretório `/src`:
 
-- **Model:** Gerencia os dados da aplicação, tipos e as regras fundamentais.
-- **View (`.view.tsx`):** Componentes puramente visuais (UI).
-- **ViewModel (`.viewmodel.ts`):** Camada do meio que conecta a View aos Models/Serviços. Contém a lógica de apresentação e interações antes de atualizar o estado visual.
+- **Model (`.model.ts`):** Entidades primitivas, tipagens (types/interfaces) e gerenciamento de domínios (ex: `CoffeeShop`).
+- **ViewModel (`.view-model.ts`):** O "cérebro" das telas. Usa hooks customizados, integra com o Zustand (Stores), manipula regras de negócio, React Query, cache, navegação e retorna um objeto puro para a View consumir.
+- **View (`.view.tsx`):** Componentes 100% visuais (*dumb components*). Recebem os dados passados pelo ViewModel através de _props_ e os renderizam na tela usando NativeWind.
 
-A navegação baseia-se no **Expo Router**, possuindo roteamento em formato de arquivos no diretório `app`.
-
-Estrutura de pastas da arquitetura (`/src`):
-- `/components`: Componentes visuais genéricos e reutilizáveis.
-- `/features`: Agrupa as telas da aplicação, onde cada funcionalidade contém seus arquivos *View* e *ViewModel*.
-- `/hooks`: Hooks React customizados do projeto.
-- `/services`: Abstração de consumo de APIs e módulos externos.
-- `/store`: Gerenciador de estado global da aplicação.
-
----
-
-## 🔌 APIs Usadas
-
-Durante a construção do aplicativo, houve a integração com as seguintes APIs externas para estudo:
-
-- **Google Places API:** Utilizada para buscar cafeterias nas proximidades, exibindo informações e marcadores diretamente no mapa integrado à aplicação.
-- **Google Sign In API:** Implementada para integrar o fluxo de autenticação, permitindo logar seguro aos usuários via conta do Google.
+Esta estrutura (`/src/features`) simplifica muito a manutenção, testes unitários e organização visual.
 
 ---
 
 ## 🛠 Frameworks e Bibliotecas (Libs)
 
-Diversas bibliotecas robustas foram incluídas em prol do ecossistema front-end do React Native:
-
-- **[React Native](https://reactnative.dev/) & [Expo](https://expo.dev/):** SDK e framework central para desenvolvimento e build (iOS, Android, Web).
-- **[Expo Router](https://docs.expo.dev/router/introduction/):** Solução moderna de roteamento (file-based routing).
-- **[NativeWind](https://www.nativewind.dev/) (com [Tailwind CSS](https://tailwindcss.com/)):** Usado intensivamente para estilizar e configurar o Design System ("Sensory Editorial") por meio de utility classes.
-- **[Zustand](https://github.com/pmndrs/zustand):** Ferramenta fácil, concisa e altamente escalável para gerenciar o estado global do projeto.
-- **[@tanstack/react-query (React Query)](https://tanstack.com/query/latest):** Gerencia requisições assíncronas, estado remoto, sincronização e cache de fetchs de dados de maneira performática.
-- **[React Native Maps](https://github.com/react-native-maps/react-native-maps):** Exibição do componente geográfico de Mapas e manipulação de marcadores interativos com a API Places.
-- **[@react-native-google-signin/google-signin](https://github.com/react-native-google-signin/google-signin):** Serviço OAuth2 de validação e sign-in da plataforma Google.
-- **[@react-native-community/geolocation](https://github.com/react-native-geolocation/react-native-geolocation):** Acesso nativo rápido e preciso aos sensores de localização real do smartphone do usuário.
+- **[React Native & Expo](https://expo.dev/):** SDK base para a aplicação.
+- **[Expo Router](https://docs.expo.dev/router/introduction/):** Navegação *file-based* baseada em rotas dinâmicas e layouts em abas (`Tabs`).
+- **[NativeWind](https://www.nativewind.dev/) (Tailwind CSS):** Estilização inteiramente baseada em *utility classes*.
+- **[Zustand](https://github.com/pmndrs/zustand):** Controle do estado global leve e escalável. Repartido em diferentes fluxos como `use-auth-store`, `use-favorites-store` e `use-visited-store`.
+- **[@tanstack/react-query](https://tanstack.com/query/latest):** Otimiza as chamadas ao Google Places API através de _cache_, validação e auto-retry (state remoto).
+- **[React Native Maps](https://github.com/react-native-maps/react-native-maps):** Motor de mapas configurado nativamente com a engine do `PROVIDER_GOOGLE`.
+- **[Google Sign-In](https://github.com/react-native-google-signin/google-signin):** Modulo nativo de autenticação.
 
 ---
 
 ## 🚀 Como Executar Localmente
 
-Para testar ou debugar o projeto localmente:
+Como o projeto faz amplo uso de SDKs de mapa do Google no iOS e recursos do Sign-In do Google, **ele não pode rodar no aplicativo Expo Go padrão**. É necessário rodar o *Custom Development Client* (com build nativo).
 
-1. Faça o clone deste repositório.
-2. Acesse a pasta do projeto (root) e instale as dependências:
+1. Faça o clone deste repositório e acesse a pasta do projeto.
+2. Instale as dependências:
    ```bash
    npm install
    ```
-3. Crie seu arquivo de ambiente (`.env.local` na raiz) e preencha as chaves públicas necessárias:
-   - `EXPO_PUBLIC_GOOGLE_PLACES_API_KEY=SUA_CHAVE_AQUI`
-   - _Entre outras que estão configuradas localmente para Google Cloud Platform e Firebase/Web Client._
-4. Inicie o Metro Bundler do Expo:
+3. Crie e configure seu `.env.local` na raiz com as chaves exigidas:
+   ```env
+   EXPO_PUBLIC_GOOGLE_PLACES_API_KEY=sua_chave_places
+   EXPO_PUBLIC_GOOGLE_MAPS_API_KEY=sua_chave_maps_ios
+   EXPO_PUBLIC_IOS_URL_SCHEMA=seu_esquema_ios
+   ```
+4. Faça o pré-build para regenerar as pastas `/ios` e `/android` conectadas ao seu app.config.js:
    ```bash
-   npx expo start
+   npx expo prebuild --clean
+   ```
+5. Rode diretamente no emulador / dispositivo gerando o client customizado:
+   ```bash
+   # Para iOS
+   npx expo run:ios
+   
+   # Para Android
+   npx expo run:android
    ```
