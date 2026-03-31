@@ -34,6 +34,7 @@ The application offers a complete user flow focused on exploring coffee shops:
 - **Coffee Shop Details:** A rich screen built with a translucent header, detailing: location photo, "Open/Closed" status, rating, amenities (Pet Friendly, Outdoor, WiFi), a direct *"How to arrive"* shortcut (opens native routes like Google Maps, Apple Maps), and a Reviews modal.
 - **Favorites:** Users can like coffee shops and easily find them in the favorites tab, managed in memory.
 - **Profile and History (Visited):** On the profile screen, users can view their Google account details and a visual history of locations actively marked as **"Visited"**.
+- **Internationalization (i18n):** Full support for multiple languages (English and Portuguese) using `i18next`, `react-i18next`, and `expo-localization`.
 
 ---
 
@@ -58,6 +59,8 @@ This structure (`/src/features`) greatly simplifies maintenance, unit testing, a
 - **[@tanstack/react-query](https://tanstack.com/query/latest):** Optimizes calls to the Google Places API through _cache_, validation, and auto-retry (remote state).
 - **[React Native Maps](https://github.com/react-native-maps/react-native-maps):** Maps engine natively configured with the `PROVIDER_GOOGLE` engine.
 - **[Google Sign-In](https://github.com/react-native-google-signin/google-signin):** Native authentication module.
+- **[i18next & react-i18next](https://react.i18next.com/):** Internationalization framework used for dynamic translation and multi-language support.
+- **[expo-localization](https://docs.expo.dev/versions/latest/sdk/localization/):** Access to the user's device locale for automatic language detection.
 
 ---
 
@@ -118,6 +121,7 @@ O aplicativo possui um fluxo de usuário completo focado na exploração de cafe
 - **Detalhes da Cafeteria (Details):** Uma tela rica construída sobre um cabeçalho translúcido, detalhando: foto do local, status "Aberto/Fechado", rating, comodidades (Pet Friendly, Outdoor, WiFi), atalho direto *"Como Chegar"* (abre rotas nativas como Google Maps, Apple Maps) e modal de Avaliações/Reviews.
 - **Favoritos:** Os usuários podem curtir cafeterias e encontrá-las facilmente na aba de favoritos, gerenciados em memória.
 - **Perfil e Histórico (Visited):** Na tela de perfil, o usuário consegue ver seus dados da conta Google e um histórico visual dos locais marcados ativamente como **"Visitados"**.
+- **Internacionalização (i18n):** Suporte completo a múltiplos idiomas (Inglês e Português) utilizando `i18next`, `react-i18next` e `expo-localization`.
 
 ---
 
@@ -142,6 +146,8 @@ Esta estrutura (`/src/features`) simplifica muito a manutenção, testes unitár
 - **[@tanstack/react-query](https://tanstack.com/query/latest):** Otimiza as chamadas ao Google Places API através de _cache_, validação e auto-retry (state remoto).
 - **[React Native Maps](https://github.com/react-native-maps/react-native-maps):** Motor de mapas configurado nativamente com a engine do `PROVIDER_GOOGLE`.
 - **[Google Sign-In](https://github.com/react-native-google-signin/google-signin):** Modulo nativo de autenticação.
+- **[i18next & react-i18next](https://react.i18next.com/):** Framework de internacionalização utilizado para tradução dinâmica e suporte a múltiplos idiomas.
+- **[expo-localization](https://docs.expo.dev/versions/latest/sdk/localization/):** Acesso à localidade (locale) nativa do dispositivo para detecção automática de idioma.
 
 ---
 
