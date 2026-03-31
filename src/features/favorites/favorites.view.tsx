@@ -3,6 +3,7 @@ import { Image } from "expo-image";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { CoffeeShop } from '@/features/home/home.model';
 import { Ionicons } from '@expo/vector-icons';
+import { useTranslation } from 'react-i18next';
 
 interface FavoritesViewProps {
     favorites: CoffeeShop[];
@@ -11,13 +12,14 @@ interface FavoritesViewProps {
 }
 
 export default function FavoritesView({ favorites, handleNavigateToDetails, handleRemoveFavorite }: FavoritesViewProps) {
+    const { t } = useTranslation();
 
     const renderEmptyComponent = () => (
         <View className="flex-1 items-center justify-center pt-20">
             <Ionicons name="heart-outline" size={64} color="#d3c8c5" />
-            <Text className="text-primary text-headline-sm font-serif mt-6 text-center">Nenhuma favorita ainda</Text>
+            <Text className="text-primary text-headline-sm font-serif mt-6 text-center">{t('favorites.emptyTitle')}</Text>
             <Text className="text-on-surface text-base font-sans mt-2 text-center px-8 opacity-70">
-                Explore o mapa e adicione cafeterias à sua lista de favoritas para vê-las aqui.
+                {t('favorites.emptySubtitle')}
             </Text>
         </View>
     );
@@ -61,7 +63,7 @@ export default function FavoritesView({ favorites, handleNavigateToDetails, hand
                 <View className="flex-row items-center justify-between">
                     {item.isOpenNow !== undefined ? (
                         <Text className={`text-xs font-bold ${item.isOpenNow ? 'text-green-600' : 'text-red-500'}`}>
-                            {item.isOpenNow ? 'Aberto' : 'Fechado'}
+                            {item.isOpenNow ? t('favorites.open') : t('favorites.closed')}
                         </Text>
                     ) : <View />}
                     
@@ -76,7 +78,7 @@ export default function FavoritesView({ favorites, handleNavigateToDetails, hand
     return (
         <SafeAreaView className="flex-1 bg-surface">
             <View className="px-6 pt-6 pb-4">
-                <Text className="text-primary text-headline-md font-serif font-bold">Cafeterias Favoritas</Text>
+                <Text className="text-primary text-headline-md font-serif font-bold">{t('favorites.title')}</Text>
             </View>
             
             <FlatList

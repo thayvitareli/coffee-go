@@ -1,0 +1,50 @@
+{
+  "tabs": {
+    "map": "Map",
+    "favorites": "Favorites",
+    "profile": "Profile"
+  },
+  "signIn": {
+    "subtitle": "Discover your next favorite roast.",
+    "googleButton": "Sign in with Google",
+    "guestButton": "Guest",
+    "otherOptions": "Other sign in options",
+    "privacy": "Privacy Policy",
+    "terms": "Terms of Service"
+  },
+  "profile": {
+    "logout": "Sign out",
+    "historyTitle": "Visit History",
+    "emptyHistoryTitle": "No places visited yet",
+    "emptyHistorySubtitle": "Explore the map and mark coffee shops as visited to see them in your history."
+  },
+  "favorites": {
+    "emptyTitle": "No favorites yet",
+    "emptySubtitle": "Explore the map and add coffee shops to your favorites list to see them here.",
+    "open": "Open",
+    "closed": "Closed",
+    "title": "Favorite Coffee Shops"
+  },
+  "details": {
+    "loading": "Loading...",
+    "notFound": "Coffee shop not found.",
+    "back": "Back",
+    "openNow": "Open Now",
+    "closed": "Closed",
+    "reviewsCount": "Reviews",
+    "amenities": {
+      "wifi": "FAST WIFI",
+      "pet": "PET FRIENDLY",
+      "outdoor": "OUTDOOR"
+    },
+    "actions": {
+      "howToArrive": "How to arrive",
+      "visited": "Visited",
+      "markVisited": "Mark as visited",
+      "share": "Share",
+      "reviews": "Reviews"
+    },
+    "about": "About",
+    "noReviews": "No reviews available."
+  }
+}

@@ -3,12 +3,14 @@ import { View, Text, TouchableOpacity, ImageBackground, SafeAreaView, Platform }
 import { Ionicons } from '@expo/vector-icons';
 import { StatusBar } from 'expo-status-bar';
 import { useSignInViewModel } from './sign-in.view-model';
+import { useTranslation } from 'react-i18next';
 
 // Unsplash placeholder image resembling the requested mood
 const BACKGROUND_IMAGE_URL = 'https://images.unsplash.com/photo-1497935586351-b67a49e012bf?q=80&w=1000';
 
 export function SignInView() {
   const { handleGoogleSignIn, handleGuestSignIn, handleGoBack } = useSignInViewModel();
+  const { t } = useTranslation();
 
   return (
     <View className="flex-1 bg-primary">
@@ -34,7 +36,7 @@ export function SignInView() {
                   COFFEGO
                 </Text>
                 <Text className="font-sans text-lg text-white/90 tracking-wide text-center">
-                  Discover your next favorite roast.
+                  {t('signIn.subtitle')}
                 </Text>
               </View>
 
@@ -48,7 +50,7 @@ export function SignInView() {
                 >
                   <Ionicons name="logo-google" size={20} color="#EA4335" className="mr-3" />
                   <Text className="font-sans text-base font-semibold text-black ml-2">
-                    Sign in with Google
+                    {t('signIn.googleButton')}
                   </Text>
                 </TouchableOpacity>
 
@@ -61,7 +63,7 @@ export function SignInView() {
                 >
                   <Ionicons name="person" size={20} color="#1a1c1a" className="mr-3" />
                   <Text className="font-sans text-sm font-bold tracking-widest text-on-surface uppercase ml-2">
-                    Guest
+                    {t('signIn.guestButton')}
                   </Text>
                 </TouchableOpacity>
               </View>
@@ -69,15 +71,15 @@ export function SignInView() {
               {/* Footer */}
               <View className="items-center mt-12">
                 <Text className="font-sans text-sm text-white/70 mb-6">
-                  Other sign in options
+                  {t('signIn.otherOptions')}
                 </Text>
                 <View className="flex-row items-center">
                   <Text className="font-sans text-[11px] font-bold tracking-widest text-white/50 uppercase">
-                    Privacy Policy
+                    {t('signIn.privacy')}
                   </Text>
                   <Text className="font-sans text-xs text-white/30 mx-3">•</Text>
                   <Text className="font-sans text-[11px] font-bold tracking-widest text-white/50 uppercase">
-                    Terms of Service
+                    {t('signIn.terms')}
                   </Text>
                 </View>
               </View>

@@ -1,0 +1,50 @@
+{
+  "tabs": {
+    "map": "Mapa",
+    "favorites": "Favoritos",
+    "profile": "Perfil"
+  },
+  "signIn": {
+    "subtitle": "Descubra sua próxima xícara favorita.",
+    "googleButton": "Entrar com o Google",
+    "guestButton": "Convidado",
+    "otherOptions": "Outras opções de login",
+    "privacy": "Política de Privacidade",
+    "terms": "Termos de Serviço"
+  },
+  "profile": {
+    "logout": "Sair",
+    "historyTitle": "Histórico de Visitas",
+    "emptyHistoryTitle": "Nenhum local visitado ainda",
+    "emptyHistorySubtitle": "Explore o mapa e marque cafeterias como visitadas para vê-las no seu histórico."
+  },
+  "favorites": {
+    "emptyTitle": "Nenhuma favorita ainda",
+    "emptySubtitle": "Explore o mapa e adicione cafeterias à sua lista de favoritas para vê-las aqui.",
+    "open": "Aberto",
+    "closed": "Fechado",
+    "title": "Cafeterias Favoritas"
+  },
+  "details": {
+    "loading": "Carregando...",
+    "notFound": "Cafeteria não encontrada.",
+    "back": "Voltar",
+    "openNow": "Aberto Agora",
+    "closed": "Fechado",
+    "reviewsCount": "Avaliações",
+    "amenities": {
+      "wifi": "WIFI RÁPIDO",
+      "pet": "PET FRIENDLY",
+      "outdoor": "AO AR LIVRE"
+    },
+    "actions": {
+      "howToArrive": "Como chegar",
+      "visited": "Visitado",
+      "markVisited": "Marcar como visitado",
+      "share": "Compartilhar",
+      "reviews": "Avaliações"
+    },
+    "about": "Sobre",
+    "noReviews": "Nenhuma avaliação disponível."
+  }
+}

@@ -4,6 +4,7 @@ import { Image } from 'expo-image';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Ionicons, MaterialCommunityIcons } from '@expo/vector-icons';
 import { useDetailsViewModel } from './details.view-model';
+import { useTranslation } from 'react-i18next';
 
 export default function DetailsView({
     coffeeShop,
@@ -19,11 +20,12 @@ export default function DetailsView({
     handleShare
 }: ReturnType<typeof useDetailsViewModel>) {
     const scrollViewRef = useRef<ScrollView>(null);
+    const { t } = useTranslation();
 
     if (isLoading) {
         return (
             <View className="flex-1 justify-center items-center bg-surface">
-                <Text className="text-primary font-sans">Carregando...</Text>
+                <Text className="text-primary font-sans">{t('details.loading')}</Text>
             </View>
         );
     }
@@ -31,9 +33,9 @@ export default function DetailsView({
     if (!coffeeShop) {
         return (
             <View className="flex-1 justify-center items-center bg-surface">
-                <Text className="text-primary font-sans">Cafeteria não encontrada.</Text>
+                <Text className="text-primary font-sans">{t('details.notFound')}</Text>
                 <TouchableOpacity onPress={handleGoBack} className="mt-4">
-                    <Text className="text-primary font-bold">Voltar</Text>
+                    <Text className="text-primary font-bold">{t('details.back')}</Text>
                 </TouchableOpacity>
             </View>
         );
@@ -77,7 +79,7 @@ export default function DetailsView({
                         {coffeeShop.isOpenNow !== undefined ? (
                             <View className={`px-3 py-1 rounded-full self-start ${coffeeShop.isOpenNow ? 'bg-green-100' : 'bg-red-100'}`}>
                                 <Text className={`text-[10px] font-bold uppercase tracking-wider ${coffeeShop.isOpenNow ? 'text-green-700' : 'text-red-700'}`}>
-                                    {coffeeShop.isOpenNow ? 'Open Now' : 'Closed'}
+                                    {coffeeShop.isOpenNow ? t('details.openNow') : t('details.closed')}
                                 </Text>
                             </View>
                         ) : <View />}
@@ -91,7 +93,7 @@ export default function DetailsView({
                             )}
                             {coffeeShop.userRatingCount && (
                                 <Text className="text-[8px] text-gray-500 uppercase tracking-widest mt-1">
-                                    {coffeeShop.userRatingCount} Reviews
+                                    {coffeeShop.userRatingCount} {t('details.reviewsCount')}
                                 </Text>
                             )}
                         </View>
@@ -105,21 +107,20 @@ export default function DetailsView({
                         {coffeeShop.address}
                     </Text>
 
-                    {/* Amenities Row */}
                     <View className="flex-row w-full justify-between mb-8">
                         <AmenityIcon 
                             icon="wifi" 
-                            label="FAST WIFI" 
+                            label={t('details.amenities.wifi')} 
                             available={true}
                         />
                         <AmenityIcon 
                             icon="paw" 
-                            label="PET FRIENDLY" 
+                            label={t('details.amenities.pet')} 
                             available={coffeeShop.allowsDogs} 
                         />
                         <AmenityIcon 
                             icon="storefront" 
-                            label="OUTDOOR" 
+                            label={t('details.amenities.outdoor')} 
                             available={coffeeShop.outdoorSeating} 
                         />
                     </View>
@@ -130,7 +131,7 @@ export default function DetailsView({
                         className="w-full bg-primary rounded-xl py-4 flex-row justify-center items-center mb-3 shadow-sm"
                     >
                         <MaterialCommunityIcons name="directions" size={20} color="white" style={{ marginRight: 8 }} />
-                        <Text className="text-white font-sans font-bold text-base">How to arrive</Text>
+                        <Text className="text-white font-sans font-bold text-base">{t('details.actions.howToArrive')}</Text>
                     </TouchableOpacity>
 
                     <TouchableOpacity 
@@ -144,7 +145,7 @@ export default function DetailsView({
                             style={{ marginRight: 8 }} 
                         />
                         <Text className={`font-sans font-bold text-base ${isVis ? 'text-[#005313]' : 'text-gray-600'}`}>
-                            {isVis ? 'Visited' : 'Mark as visited'}
+                            {isVis ? t('details.actions.visited') : t('details.actions.markVisited')}
                         </Text>
                     </TouchableOpacity>
 
@@ -154,14 +155,14 @@ export default function DetailsView({
                             className="flex-1 bg-surface-container rounded-xl py-3 flex-row justify-center items-center px-1"
                         >
                             <Ionicons name="share-outline" size={18} color="gray" style={{ marginRight: 6 }} />
-                            <Text className="text-gray-600 font-sans font-bold text-sm">Share</Text>
+                            <Text className="text-gray-600 font-sans font-bold text-sm">{t('details.actions.share')}</Text>
                         </TouchableOpacity>
                         <TouchableOpacity 
                             onPress={() => setShowReviews(true)}
                             className="flex-1 bg-surface-container rounded-xl py-3 flex-row justify-center items-center px-1"
                         >
                             <Ionicons name="chatbubble-outline" size={18} color="gray" style={{ marginRight: 6 }} />
-                            <Text className="text-gray-600 font-sans font-bold text-sm">Reviews</Text>
+                            <Text className="text-gray-600 font-sans font-bold text-sm">{t('details.actions.reviews')}</Text>
                         </TouchableOpacity>
                     </View>
                 </View>
@@ -169,7 +170,7 @@ export default function DetailsView({
                 {/* Editorial Summary / Description */}
                 {coffeeShop.editorialSummary ? (
                     <View className="px-6 py-8">
-                        <Text className="font-serif text-2xl font-bold text-primary mb-2">About</Text>
+                        <Text className="font-serif text-2xl font-bold text-primary mb-2">{t('details.about')}</Text>
                         <Text className="text-gray-600 font-sans leading-relaxed">
                             {coffeeShop.editorialSummary}
                         </Text>
@@ -186,7 +187,7 @@ export default function DetailsView({
                     <View className="flex-1 justify-end bg-black/50">
                         <View className="bg-surface rounded-t-3xl h-[80%] p-6">
                             <View className="flex-row justify-between items-center mb-6">
-                                <Text className="font-serif text-2xl font-bold text-primary">Reviews</Text>
+                                <Text className="font-serif text-2xl font-bold text-primary">{t('details.actions.reviews')}</Text>
                                 <TouchableOpacity onPress={() => setShowReviews(false)} className="w-8 h-8 rounded-full bg-surface-container items-center justify-center">
                                     <Ionicons name="close" size={20} color="black" />
                                 </TouchableOpacity>
@@ -208,7 +209,7 @@ export default function DetailsView({
                                         </View>
                                     ))
                                 ) : (
-                                    <Text className="text-gray-500 font-sans text-center mt-10">Nenhuma avaliação disponível.</Text>
+                                    <Text className="text-gray-500 font-sans text-center mt-10">{t('details.noReviews')}</Text>
                                 )}
                                 <View className="h-10" />
                             </ScrollView>

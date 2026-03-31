@@ -8,11 +8,13 @@ import { Ionicons } from '@expo/vector-icons';
 import { View } from 'react-native';
 import { useAuthStore } from '@/store/use-auth-store';
 import { useRouter } from 'expo-router';
+import { useTranslation } from 'react-i18next';
 
 export default function TabLayout() {
   const colorScheme = useColorScheme();
   const router = useRouter();
   const { isAuthenticated, isGuest } = useAuthStore();
+  const { t } = useTranslation();
 
   const requireAuth = (e: any) => {
     // If user is not authenticated or is browsing as a guest, require explicit login
@@ -43,7 +45,7 @@ export default function TabLayout() {
         name="index"
         options={{
           headerShown: false,
-          title: 'Map',
+          title: t('tabs.map'),
           tabBarIcon: ({ color }) => <Ionicons size={28} name="map-sharp" color={color} />,
         }}
       />
@@ -51,7 +53,7 @@ export default function TabLayout() {
       <Tabs.Screen
         name="favorites"
         options={{
-          title: 'Favorites',
+          title: t('tabs.favorites'),
           tabBarIcon: ({ color }) => <Ionicons size={28} name="heart" color={color} />,
         }}
         listeners={{ tabPress: requireAuth }}
@@ -59,7 +61,7 @@ export default function TabLayout() {
       <Tabs.Screen
         name="profile"
         options={{
-          title: 'Profile',
+          title: t('tabs.profile'),
           tabBarIcon: ({ color }) => <Ionicons size={28} name="person" color={color} />,
         }}
         listeners={{ tabPress: requireAuth }}

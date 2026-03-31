@@ -5,6 +5,7 @@ import { Pressable, Text, View, FlatList, TouchableOpacity } from "react-native"
 import { CoffeeShop } from '@/features/home/home.model';
 import { Ionicons } from '@expo/vector-icons';
 import { useProfileViewModel } from "./profile.view-model";
+import { useTranslation } from 'react-i18next';
 
 type ProfileViewProps = ReturnType<typeof useProfileViewModel>;
 
@@ -14,6 +15,7 @@ export default function ProfileView({
     visitedShops, 
     handleNavigateToDetails 
 }: ProfileViewProps) {
+    const { t } = useTranslation();
     
     const renderHeader = () => (
         <View className="items-center w-full mb-6">
@@ -27,12 +29,12 @@ export default function ProfileView({
                 <Text className="text-primary text-headline-sm font-serif">{user?.name}</Text>
                 
                 <Pressable className="bg-primary rounded-lg px-6 py-2 mt-2" onPress={signOut} >
-                    <Text className="text-on-primary text-label-md uppercase font-bold tracking-widest">Sair</Text>
+                    <Text className="text-on-primary text-label-md uppercase font-bold tracking-widest">{t('profile.logout')}</Text>
                 </Pressable>
             </View>
             
             <View className="w-full mt-10 px-2 flex-row justify-between items-center">
-                <Text className="text-primary font-serif font-bold text-lg">Histórico de Visitas</Text>
+                <Text className="text-primary font-serif font-bold text-lg">{t('profile.historyTitle')}</Text>
                 <Text className="text-primary font-sans text-xs bg-surface-container px-2 py-1 rounded-md">{visitedShops.length}</Text>
             </View>
         </View>
@@ -41,9 +43,9 @@ export default function ProfileView({
     const renderEmptyComponent = () => (
         <View className="items-center justify-center pt-10">
             <Ionicons name="map-outline" size={48} color="#d3c8c5" />
-            <Text className="text-primary text-base font-serif mt-4 text-center">Nenhum local visitado ainda</Text>
+            <Text className="text-primary text-base font-serif mt-4 text-center">{t('profile.emptyHistoryTitle')}</Text>
             <Text className="text-on-surface text-sm font-sans mt-2 text-center px-8 opacity-70">
-                Explore o mapa e marque cafeterias como visitadas para vê-las no seu histórico.
+                {t('profile.emptyHistorySubtitle')}
             </Text>
         </View>
     );
