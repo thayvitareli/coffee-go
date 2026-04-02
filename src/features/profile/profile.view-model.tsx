@@ -12,9 +12,14 @@ export const useProfileViewModel = () => {
         router.push(`/details/${coffeeShop.id}` as any);
     };
 
+    const handleSignOut = () => {
+        signOut();
+        router.replace('/(tabs)' as any);
+    };
+
     return {
         user,
-        signOut,
+        signOut: handleSignOut,
         visitedShops,
         handleNavigateToDetails
     }
