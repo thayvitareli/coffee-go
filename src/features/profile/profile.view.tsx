@@ -13,7 +13,9 @@ export default function ProfileView({
     user, 
     signOut, 
     visitedShops, 
-    handleNavigateToDetails 
+    handleNavigateToDetails,
+    currentLanguage,
+    changeLanguage
 }: ProfileViewProps) {
     const { t } = useTranslation();
     
@@ -31,6 +33,21 @@ export default function ProfileView({
                 <Pressable className="bg-primary rounded-lg px-6 py-2 mt-2" onPress={signOut} >
                     <Text className="text-on-primary text-label-md uppercase font-bold tracking-widest">{t('profile.logout')}</Text>
                 </Pressable>
+
+                <View className="flex-row items-center mt-4 gap-3 bg-surface-container/50 px-2 py-1.5 rounded-full">
+                    <Pressable 
+                        className={`px-6 py-1.5 rounded-full ${currentLanguage === 'pt' ? 'bg-primary shadow-sm' : 'bg-transparent'}`}
+                        onPress={() => changeLanguage('pt')}
+                    >
+                        <Text className={`font-sans text-sm ${currentLanguage === 'pt' ? 'text-on-primary font-bold' : 'text-primary'}`}>PT</Text>
+                    </Pressable>
+                    <Pressable 
+                        className={`px-6 py-1.5 rounded-full ${currentLanguage === 'en' ? 'bg-primary shadow-sm' : 'bg-transparent'}`}
+                        onPress={() => changeLanguage('en')}
+                    >
+                        <Text className={`font-sans text-sm ${currentLanguage === 'en' ? 'text-on-primary font-bold' : 'text-primary'}`}>EN</Text>
+                    </Pressable>
+                </View>
             </View>
             
             <View className="w-full mt-10 px-2 flex-row justify-between items-center">
