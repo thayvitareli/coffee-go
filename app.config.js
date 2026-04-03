@@ -17,7 +17,7 @@ module.exports = {
         NSLocationAlwaysAndWhenInUseUsageDescription: "O aplicativo precisa de acesso à localização para mostrar as cafeterias próximas."
       },
       config: {
-        googleMapsApiKey: process.env.EXPO_PUBLIC_GOOGLE_MAPS_API_KEY
+        googleMapsApiKey: process.env.EXPO_PUBLIC_GOOGLE_MAPS_API_KEY || process.env.EXPO_PUBLIC_GOOGLE_PLACES_API_KEY
       }
     },
     android: {
@@ -27,7 +27,7 @@ module.exports = {
       ],
       config: {
         googleMaps: {
-          apiKey: process.env.EXPO_PUBLIC_GOOGLE_MAPS_API_KEY || process.env.GOOGLE_MAPS_API_KEY
+          apiKey: process.env.EXPO_PUBLIC_GOOGLE_MAPS_API_KEY || process.env.EXPO_PUBLIC_GOOGLE_PLACES_API_KEY
         }
       },
       adaptiveIcon: {
