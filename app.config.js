@@ -63,6 +63,11 @@ module.exports = {
     experiments: {
       typedRoutes: true,
       reactCompiler: true
+    },
+    extra: {
+      eas: {
+        projectId: process.env.EXPO_PUBLIC_EAS_PROJECT_ID
+      }
     }
-  }
+  },
 };
