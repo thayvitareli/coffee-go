@@ -1,14 +1,10 @@
 import { useState, useEffect } from 'react';
-import { Platform, PermissionsAndroid } from 'react-native';
-import Geolocation, { GeolocationResponse } from '@react-native-community/geolocation';
-
-Geolocation.setRNConfiguration({
-  skipPermissionRequests: false,
-  authorizationLevel: 'whenInUse',
-});
+import * as Location from 'expo-location';
 
 export const useLocationPermission = () => {
-  const [location, setLocation] = useState<GeolocationResponse | null>(null);
+  // Alterado para usar o tipo correspondente do expo-location. 
+  // A estrutura (location.coords.latitude/longitude) continua exatamente a mesma.
+  const [location, setLocation] = useState<Location.LocationObject | null>(null);
   const [errorMsg, setErrorMsg] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(true);
 
@@ -17,42 +13,33 @@ export const useLocationPermission = () => {
     setErrorMsg(null);
 
     try {
-      if (Platform.OS === 'android') {
-        const granted = await PermissionsAndroid.request(
-          PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
-          {
-            title: 'Permissão de Localização',
-            message: 'O aplicativo precisa de acesso à sua localização para mostrar os itens próximos.',
-            buttonNeutral: 'Perguntar depois',
-            buttonNegative: 'Cancelar',
-            buttonPositive: 'OK',
-          }
-        );
-
-        if (granted !== PermissionsAndroid.RESULTS.GRANTED) {
-          setErrorMsg('Permissão de acesso à localização foi negada.');
-          setIsLoading(false);
-          return false;
-        }
-      } else if (Platform.OS === 'ios') {
-        // No iOS, se não estiver usando o template nativo, normalmente a biblioteca gerencia, 
-        // mas explicitamos o request de qualquer forma.
-        Geolocation.requestAuthorization();
+      const { status } = await Location.requestForegroundPermissionsAsync();
+      
+      if (status !== 'granted') {
+        setErrorMsg('Permissão de acesso à localização foi negada.');
+        setIsLoading(false);
+        return false;
       }
 
-      // Buscar localização
-      Geolocation.getCurrentPosition(
-        (position) => {
-          setLocation(position);
-          setIsLoading(false);
-        },
-        (error) => {
-          setErrorMsg(`Erro ao obter a localização: ${error.message}`);
-          setIsLoading(false);
-        },
-        { enableHighAccuracy: true, timeout: 15000, maximumAge: 10000 }
-      );
-      
+      try {
+        // No Android, Balanced Accuracy costuma ser instantâneo e não dá os timeouts
+        // frequentes que ocorrem quando há exigência de GPS estrito via hardware.
+        const currentPosition = await Location.getCurrentPositionAsync({
+          accuracy: Location.Accuracy.Balanced,
+        });
+        
+        setLocation(currentPosition);
+      } catch (locationError: any) {
+        // Plano de contingência caso ainda haja problema obter ao vivo, pega a última localização registrada
+        const lastKnown = await Location.getLastKnownPositionAsync();
+        if (lastKnown) {
+          setLocation(lastKnown);
+        } else {
+          setErrorMsg(`Erro ao obter a localização: ${locationError.message}`);
+        }
+      }
+
+      setIsLoading(false);
       return true;
     } catch (err) {
       setErrorMsg('Erro inesperado ao solicitar permissão.');
