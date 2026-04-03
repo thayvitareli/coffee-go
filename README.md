@@ -30,7 +30,8 @@ The app steps away from traditional UI patterns to implement an original Design 
 The application offers a complete user flow focused on exploring coffee shops:
 
 - **Authentication:** Secure and practical social login using the **Google Sign-In API**.
-- **Map Exploration (Home):** The main map tracks the user's location and uses the **Google Places API** to plot interactive markers for nearby coffee shops. Native rendering of the Google Maps SDK.
+- **Map Exploration (Home):** The main map tracks the user's location with a custom branded marker and plots nearby coffee shops using the **Google Places API**. Native rendering via Google Maps SDK.
+- **Search (Discovery):** A modern tab featuring an "Editor's Choice" carousel and nearby roasteries. Includes real-time text filtering, explicit tags (e.g., Open Now), dynamic geographic distance calculations (Haversine formula), and infinite virtual scrolling behavior.
 - **Coffee Shop Details:** A rich screen built with a translucent header, detailing: location photo, "Open/Closed" status, rating, amenities (Pet Friendly, Outdoor, WiFi), a direct *"How to arrive"* shortcut (opens native routes like Google Maps, Apple Maps), and a Reviews modal.
 - **Favorites:** Users can like coffee shops and easily find them in the favorites tab, managed in memory.
 - **Profile and History (Visited):** On the profile screen, users can view their Google account details and a visual history of locations actively marked as **"Visited"**.
@@ -117,7 +118,8 @@ O aplicativo foge do padrão de UI tradicional e implementa um Design System aut
 O aplicativo possui um fluxo de usuário completo focado na exploração de cafeterias:
 
 - **Autenticação:** Login social seguro e prático usando a API do **Google Sign-In**.
-- **Exploração por Mapa (Home):** O mapa principal rastreia a localização do usuário e utiliza a **Google Places API** para plotar *markers* interativos de cafeterias próximas. Renderização nativa do SDK do Google Maps.
+- **Exploração por Mapa (Home):** O mapa rastreia a localização do usuário com um marcador personalizado usando as cores da marca e utiliza a **Google Places API** para plotar *markers* interativos. Renderização nativa do SDK do Google Maps.
+- **Pesquisa e Descoberta (Search):** Uma tela moderna com um carrossel de recomendações e listagem dinâmica de torrefações próximas. Possui filtros de texto em tempo real, cálculos geográficos usando a fórmula Haversine para ordenar exatamente por distância, e paginação local por *lazy loading* progressivo (*infinite scroll*).
 - **Detalhes da Cafeteria (Details):** Uma tela rica construída sobre um cabeçalho translúcido, detalhando: foto do local, status "Aberto/Fechado", rating, comodidades (Pet Friendly, Outdoor, WiFi), atalho direto *"Como Chegar"* (abre rotas nativas como Google Maps, Apple Maps) e modal de Avaliações/Reviews.
 - **Favoritos:** Os usuários podem curtir cafeterias e encontrá-las facilmente na aba de favoritos, gerenciados em memória.
 - **Perfil e Histórico (Visited):** Na tela de perfil, o usuário consegue ver seus dados da conta Google e um histórico visual dos locais marcados ativamente como **"Visitados"**.
