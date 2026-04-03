@@ -46,5 +46,22 @@
     },
     "about": "About",
     "noReviews": "No reviews available."
+  },
+  "search": {
+    "searchTab": "Search",
+    "placeholder": "Find your next roast...",
+    "filters": {
+      "nearMe": "Near Me",
+      "openNow": "Open Now",
+      "wifi": "Wi-Fi"
+    },
+    "editorsChoice": "EDITOR'S CHOICE",
+    "recommended": "Recommended",
+    "seeAll": "See all ->",
+    "nearbyRoasteries": "Nearby Places",
+    "distanceAway": "{{distance}} away",
+    "open": "OPEN",
+    "closed": "CLOSED"
   }
 }
+

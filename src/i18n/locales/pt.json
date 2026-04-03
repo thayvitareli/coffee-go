@@ -46,5 +46,21 @@
     },
     "about": "Sobre",
     "noReviews": "Nenhuma avaliação disponível."
+  },
+  "search": {
+    "searchTab": "Pesquisar",
+    "placeholder": "Encontre sua próxima torra...",
+    "filters": {
+      "nearMe": "Perto de Mim",
+      "openNow": "Aberto Agora",
+      "wifi": "Wi-Fi"
+    },
+    "editorsChoice": "ESCOLHA DO EDITOR",
+    "recommended": "Recomendados",
+    "seeAll": "Ver todos ->",
+    "nearbyRoasteries": "Locais Próximos",
+    "distanceAway": "{{distance}} de distância",
+    "open": "ABERTO",
+    "closed": "FECHADO"
   }
 }

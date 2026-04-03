@@ -49,6 +49,14 @@ export default function TabLayout() {
           tabBarIcon: ({ color }) => <Ionicons size={28} name="map-sharp" color={color} />,
         }}
       />
+      <Tabs.Screen
+        name="search"
+        options={{
+          headerShown: false,
+          title: t('search.searchTab'),
+          tabBarIcon: ({ color }) => <Ionicons size={28} name="search" color={color} />,
+        }}
+      />
      
       <Tabs.Screen
         name="favorites"
