@@ -36,9 +36,23 @@ export default function HomeView({handleNavigateToDetails, coffeeShops, location
                             latitudeDelta: 0.01,
                             longitudeDelta: 0.01,
                         }}
-                        showsUserLocation={true}
+                        showsUserLocation={false}
                         // provider={PROVIDER_GOOGLE}
                     >
+                        {/* Custom User Location Marker */}
+                        <Marker 
+                            coordinate={{ 
+                                latitude: location.coords.latitude, 
+                                longitude: location.coords.longitude 
+                            }}
+                            zIndex={999}
+                        >
+                            <View className="items-center justify-center">
+                                <View className="w-10 h-10 rounded-full bg-[#86f284]/40 absolute" />
+                                <View className="w-6 h-6 rounded-full bg-[#86f284] border-white border-[3px] shadow-sm" />
+                            </View>
+                        </Marker>
+
                         {coffeeShops.map((shop) => (
                             <Marker
                                 key={shop.id}
