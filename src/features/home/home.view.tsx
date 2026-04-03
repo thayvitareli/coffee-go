@@ -1,10 +1,10 @@
 import SimpleLineIcons from '@expo/vector-icons/SimpleLineIcons';
-import { ActivityIndicator, Text, TouchableOpacity, View } from "react-native";
-import MapView, { Marker, Callout } from "react-native-maps";
+import { GeolocationResponse } from '@react-native-community/geolocation';
 import { Image } from "expo-image";
+import { ActivityIndicator, Text, TouchableOpacity, View } from "react-native";
+import MapView, { Callout, Marker } from "react-native-maps";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { CoffeeShop } from './home.model';
-import { GeolocationResponse } from '@react-native-community/geolocation';
 
 export default function HomeView({handleNavigateToDetails, coffeeShops, location, errorMsg, isLoading, requestPermissionAndFetchLocation}: {handleNavigateToDetails: (coffeeShop: CoffeeShop) => void, coffeeShops: CoffeeShop[], location: GeolocationResponse | null, errorMsg: string | null, isLoading: boolean, requestPermissionAndFetchLocation: () => void}) {
     const insets = useSafeAreaInsets();
@@ -48,8 +48,7 @@ export default function HomeView({handleNavigateToDetails, coffeeShops, location
                             zIndex={999}
                         >
                             <View className="items-center justify-center">
-                                <View className="w-10 h-10 rounded-full bg-[#86f284]/40 absolute" />
-                                <View className="w-6 h-6 rounded-full bg-[#86f284] border-white border-[3px] shadow-sm" />
+                                <View className="w-6 h-6 rounded-full bg-[#86f284] border-white border-[4px] shadow-sm" />
                             </View>
                         </Marker>
 
